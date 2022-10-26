@@ -1,0 +1,174 @@
+  <!DOCTYPE html>
+  <html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicPlayer</title>
+
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/dracula.min.css">
+
+  </head>
+  <body>
+    <!-- modal -->
+    <div class="source">
+      <button class="source-btn">소스보기</button>
+      <div id="modal">
+          <div class="modal-wrap">
+              <div class="modal-cont">
+                  <div class="code-view">
+                      <div class="view-header" aria-hidden="true">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                      </div>
+                      <div class="view-title">
+                          <ul>
+                              <li class="active"><a href="#">HTML</a></li>
+                              <li><a href="#">CSS</a></li>
+                              <li><a href="#">JavaScript</a></li>
+                          </ul>
+                      </div>
+                      <div class="view-cont">
+                          <div>
+<pre><code class="language-javascript">
+mainAudio.addEventListener("timeupdate", (e)=>{
+    const currentTime = e.target.currentTime;
+    const duration = e.target.duration;
+    let progressWidth = (currentTime / duration) * 100;
+    progressBar.style.width = `${progressWidth}%`;
+
+    let musicCurrenTime = wrapper.querySelector(".current"),
+    musicDuration = wrapper.querySelector(".duration");
+
+    mainAudio.addEventListener("loadeddata",()=>{
+        let audioDuration = mainAudio.duration;
+        let totalMin = Math.floor(audioDuration / 60);
+        let totalSec = Math.floor(audioDuration % 60);
+        if(totalSec &lt; 10){totalSec = `0${totalSec}`;
+        }
+        musicDuration.innerText = `${totalMin} : ${totalSec}`;
+    });
+
+    let currentMin = Math.floor(currentTime / 60);
+    let currentsec = Math.floor(currentTime % 60);
+    if(currentsec &lt; 10){currentsec = `0${currentsec}`;
+    }
+    musicCurrenTime.innerText = `${currentMin} : ${currentsec}`;
+});
+</code></pre>
+</div>
+<!-- //cont1 -->
+
+<div>
+<pre><code class="language-javascript">
+function loadMusic(indexNumb) {
+    musicName.innerText = allMusic[indexNumb - 1].name;
+    musicArtist.innerText = allMusic[indexNumb - 1].artist;
+    musicImg.src = `images/${allMusic[indexNumb - 1].img}.jpg`;
+    mainAudio.src = `Music/${allMusic[indexNumb - 1].src}.mp3`;
+}
+</code></pre>
+</div>
+<!-- //cont2 -->
+
+<div>
+<pre><code class="language-javascript">
+let allMusic = [
+  {
+    artist: "Good Bye",
+    name: "박효신",
+    img: "music-1",
+    src: "music-1"
+  },
+  {
+    artist: "First Love",
+    name: "Hisaishi-Joe",
+    img: "music-2",
+    src: "music-2"
+  },
+  {
+    artist: "야생화",
+    name: "박효신",
+    img: "music-3",
+    src: "music-3"
+  },
+  {
+    artist: "Summer",
+    name: "Hisaishi-Joe",
+    img: "music-4",
+    src: "music-4"
+  },
+  {
+    artist: "겨울잠",
+    name: "IU",
+    img: "music-5",
+    src: "music-5"
+  },
+];
+</code></pre>
+</div>
+<!-- //cont3 -->
+                      </div>
+                  </div>
+              </div>
+              <button class="modal-close">닫기</button>
+          </div>
+      </div>
+  </div>
+
+  <!-- info -->
+    <div class="wrapper" style="display: flex; justify-content: space-around; align-items: center;">
+      <div class="img_area">
+        <img src="" alt="" />
+      </div>
+      <div style="width: 60%; padding-left: 50px;">
+        <div class="song_details">
+        <p class="name"></p>
+        <p class="artist"></p>
+        </div>
+        <div class="progress_area">
+        <div class="progress_bar"></div>
+        <div class="timer">
+          <span class="current"></span>
+          <span class="duration"></span>
+        </div>
+        <audio id="main_audio" src=""></audio>
+        </div>
+        <div class="controls">
+          <i id="repeat_plist" class="material-icons" title="Playlist looped">repeat</i>
+          <i id="prev" class="material-icons">skip_previous</i>
+          <div class="play_pause">
+            <i class="material-icons">play_arrow</i>
+          </div>
+          <i id="next" class="material-icons">skip_next</i>
+          <i id="more_music" class="material-icons">queue_music</i>
+        </div>
+        <div class="music_list">
+        <div class="header">
+          <div calss="row">
+            <i class="material-icons">queue_music</i>
+            <span>Music list</span>
+          </div>
+          <i id="close" class="material-icons">close</i>
+        </div>
+        <ul></ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/music_list.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/highlight.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+      highlight();
+      modal();
+      tabMenu();
+    </script>
+    </body>
+    </html>

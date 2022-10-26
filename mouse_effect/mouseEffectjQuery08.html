@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Moust Effect08 - jQuery</title>
+    </head>
+    
+    <style>
+      /* reset */
+@font-face { 
+    font-family: 'NEXON Lv1 Gothic OTF'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+*, *::before, *::after {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+a:hover {
+    border-bottom: 1px dashed #fff;
+}
+
+img {
+    width: 100%;
+    vertical-align: top;
+}
+
+ul {
+    padding: 10px 20px;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+  background: url(/mouse_effect/assets/img/sc11@2.jpg) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    height: 100vh;
+    transition: all 0.2s;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    cursor: none;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 36, 70, 0.9);
+    z-index: -1;
+}
+
+   /* info */
+   .info {
+        color: #fff;
+        font-family: "NEXONLv1Gothic";
+        padding: 20px;
+        position: absolute;
+    }
+
+    .info h1 {
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 1.6;
+        border-bottom: 1px dashed #fff;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    .info h1 a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 400;
+    }
+    .info p {
+        font-weight: 300;
+        font-size: 16px;
+    }
+    .info li {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .info.left {
+        top: auto;
+        left: 0px;
+        bottom: 0px;
+    }
+    .info.left li {
+        display: block;
+        font-size: 14px;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+    .info.right {
+      right: 20px; top: 20px;
+    }
+    .info li a {
+      color:#fff;
+      width: 50px; height: 50px;
+      border: 1px dashed #fff;
+      display: inline-block;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 50px;
+      font-size: 0.8rem;
+      margin: 3px;
+    }
+    .info li a.active {
+        background: #fff;
+        color: #000;
+    }
+
+        /* main */
+        .textWrap{
+          position: absolute;
+          left: 50%; top: 50%;
+          transform: translate(-50%, -20%);
+        }
+        .textWrap span{
+          display: inline-block;
+          font-size: 3vw;
+          font-weight: bold;
+        }
+        .textWrap .line {
+          width: 100%;
+          display: flex;
+        }
+        .textWrap .line .left {
+          width: 50vw;
+          transform: skew(0, -15deg);
+          color: gold;
+          overflow: hidden;
+        }
+        .textWrap .line .right {
+          width: 50vw;
+          transform: skew(0, 15deg);
+          overflow: hidden;
+        }
+        .textWrap .line .left .spanWrap{
+          width: 100vw;
+          text-align: center;
+        }
+        .textWrap .line .right .spanWrap {
+          width: 100vw;
+          text-align: center;
+          transform: translate(-50vw);
+
+        }
+        .imgWrap {
+          position: absolute;
+          left: 50%; top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: -1;
+        }
+        /* //main */
+    </style>
+    <body>
+
+      <!-- main -->
+      <main>
+        <div class="contents">
+          <div class="move-image">
+            <div class="textWrap">
+              <div class="line">
+                <div class="left">
+                  <div class="spanWrap">
+                    <span class="spanSlow">Pain Past</span>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="spanWrap">
+                    <span class="spanSlow">Pain Past</span>
+                  </div>
+                </div>
+              </div>
+              <div class="line">
+                <div class="left">
+                  <div class="spanWrap">
+                    <span class="spanFast">is pleasure</span>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="spanWrap">
+                    <span  class="spanFast">is pleasure</span>
+                  </div>
+                </div>
+              </div>
+              <div class="line">
+                <div class="left">
+                  <div class="spanWrap">
+                    <span class="spanSlow">지니간 고통은</span>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="spanWrap">
+                    <span class="spanSlow">지니간 고통은</span>
+                  </div>
+                </div>
+              </div>
+              <div class="line">
+                <div class="left">
+                  <div class="spanWrap">
+                    <span  class="spanFast">쾌락이다</span>
+                  </div>
+                </div>
+                <div class="right">
+                  <div class="spanWrap">
+                    <span  class="spanFast">쾌락이다</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="imgWrap">
+              <img src="/mouse_effect/assets/img/sc11@3.jpg" alt="이미지">
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- //main -->
+    
+      <!-- info -->
+      <div class="info left">
+          <h1><a href="mouse00.html">jQuery Mouse Effect08</a></h1>
+          <p>마우스 방향에 따라 움직이기</p>
+      </div>
+
+      <div class="info right">
+        <ul>
+            <li><a href="mouseEffectJabascript01.html">JS_01</a><a href="mouseEffectjQuery01.html">JQ_1</a></li>
+            <li><a href="mouseEffectJabascript02.html">JS_02</a><a href="mouseEffectjQuery02.html">JQ_2</a></li>
+            <li><a href="mouseEffectJabascript03.html">JS_03</a><a href="mouseEffectjQuery03.html">JQ_3</a></li>
+            <li><a href="mouseEffectJavascript04.html">JS_04</a><a href="mouseEffectjQuery04.html">JQ_4</a></li>
+            <li><a href="mouseEffectJavascript05.html">JS_05</a><a href="mouseEffectjQuery05.html">JQ_5</a></li>
+            <li><a href="mouseEffectJavascript06.html">JS_06</a><a href="mouseEffectjQuery06.html">JQ_6</a></li>
+            <li><a href="mouseEffectJavascript07.html">JS_07</a><a href="mouseEffectjQuery07.html">JQ_7</a></li>
+            <li><a href="mouseEffectJavascript08.html">JS_08</a><a href="mouseEffectjQuery08.html" class="active">JQ_8</a></li>
+        </ul>
+      </div>
+
+        <div class="info bottom">
+            <ul>
+                <li>pageX : <span class="pageX">0</span></li>
+                <li>pageY : <span class="pageY">0</span></li>
+                <li>positionSlow : <span class="positionSlow">0</span></li>
+                <li>positionFast : <span class="positionFast">0</span></li>
+            </ul>
+        </div>
+        <!-- info -->
+
+        <!-- script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script>
+      $(window).on("mousemove", mouseMove);
+
+      function mouseMove(e){
+        let positionSlow = (e.pageX - ($(window).width() / 2)) * 0.1;
+        let positionFast = (e.pageX - ($(window).width() / 2)) * 0.15;
+
+        $(".spanSlow").css({"transform": "translateX("+ positionSlow +"px)"});
+        $(".spanFast").css({"transform": "translateX("+ -positionFast +"px)"});
+
+        gsap.to(".spanSlow", { duration: 0.4, x: positionSlow })
+        gsap.to(".spanFast", { duration: 0.4, x: -positionFast })
+
+        //출력용
+        $(".pageX").text(e.pageX);
+        $(".pageY").text(e.pageY);
+        $(".positionSlow").text(parseInt(positionSlow));
+        $(".positionFast").text(parseInt(positionFast));
+      }
+    </script>
+    </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Game</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dracula.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="source">
+        <button class="source-btn">소스보기</button>
+        <div id="modal">
+            <div class="modal-wrap">
+                <div class="modal-cont">
+                    <div class="code-view">
+                        <div class="view-header" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="view-title">
+                            <ul>
+                                <li class="active"><a href="#">HTML</a></li>
+                                <li><a href="#">CSS</a></li>
+                            </ul>
+                        </div>
+                        <div class="view-cont">
+                            <div>
+<pre><code class="language-js">
+// 단어 불러오기
+function getWords(){
+  axios
+    .get("https://random-word-api.herokuapp.com/word?number=100")
+    .then(function (response){
+      response.data.forEach((word) =>{
+        if (word.length &lt; 10){
+          words.push(word);
+        }
+      });
+      buttonChange("게임시작");
+      console.log(words);
+      // handle success
+    })
+    .catch(function (error){
+      // handle error
+      console.log(error);
+    });
+}
+</code></pre>
+                            </div>
+                            <!-- //cont1 -->
+                            <div>
+<pre><code class="language-js">
+// 단어 일치 체크
+function checkMatch(){
+  if (wordInput.value.toLowerCase() === wordDisplay.innerText.toLowerCase()){
+    wordInput.value = "";
+    if (!isPlaying){
+      return;
+    }
+    score++;
+    scoreDisplay.innerText = score;
+    time = GAME_TIME;
+    const randomIndex = Math.floor(Math.random() * words.length);
+    wordDisplay.innerText = words[randomIndex];
+  }
+}
+</code></pre>
+                            </div>
+                            <!-- //cont2 -->
+                        </div>
+                    </div>
+                </div>
+                <button class="modal-close">닫기</button>
+            </div>
+        </div>
+    </div>
+    <!-- //info -->
+    <div class="header">
+        <h1>Typing Game</h1>
+    </div>
+    <div class="contents">
+        <div class="word-display">
+            Hello
+        </div>
+        <div class="word_input-box">
+            <input type="text" class="word-input">
+        </div>
+        <div class="game-info">
+            <div>
+                남은시간 : <span class="time">0</span>초
+            </div>
+            <div>
+                획득점수 : <span class="score">0</span>점
+            </div>
+        </div>
+        <button class="button loading" onclick="run()">게임을 불러오는중...</button>
+    </div>
+    <!-- script -->
+    <script src="js/script.js"></script>
+    <script src="js/highlight.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+        highlight();
+        modal();
+        tabMenu();
+    </script>
+</body>
+</html>

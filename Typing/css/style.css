@@ -1,0 +1,63 @@
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+.contents {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.header {
+    background: #6768ab;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+.word-display {
+    width: 40%;
+    margin: 50px;
+    padding: 20px 0;
+    border: 2px solid #6768ab;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 80px;
+    color: #6768ab;
+}
+.word-input-box {
+    margin-top: 2rem;
+}
+.word-input {
+    font-size: 21px;
+    padding: 0.5rem;
+    width: 500px;
+    border-style: none;
+    border-bottom: 2px solid #6768ab;
+}
+input:focus {outline:none;}
+input{text-align: center;}
+.game-info {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+.time, .score {
+    font-size: 30px;
+}
+.button {
+    width: 200px;
+    height: 35px;
+    background: #6768ab;
+    color: #fff;
+    border: none;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+.loading {
+    background: #ccc;
+    cursor: not-allowed;
+}

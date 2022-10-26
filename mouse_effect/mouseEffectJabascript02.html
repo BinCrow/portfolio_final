@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moues Effect02 - Jabascript</title>
+</head>
+
+<style>
+  /* reset */
+@font-face { 
+    font-family: 'NEXON Lv1 Gothic OTF'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+*, *::before, *::after {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+a:hover {
+    border-bottom: 1px dashed #fff;
+}
+
+img {
+    width: 100%;
+    vertical-align: top;
+}
+
+ul {
+    padding: 10px 20px;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+  background: url(/mouse_effect/assets/img/bg2.jpg) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    height: 100vh;
+    transition: all 0.2s;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    cursor: none;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 36, 70, 0.9);
+    z-index: -1;
+}
+
+    /* mouse */
+    .mouse {
+        background: #222;
+        color: #fff;
+        font-family: 'NEXONLv1Gothic';
+        font-weight: 400;
+    }
+    .bg {
+        position: relative;
+        height: 100vh;
+        background-image: url(../assets/img/bg3.jpg);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .bg::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(52, 5, 70, 0.7);
+        z-index: -1;
+    }
+
+   /* info */
+   .info {
+        color: #fff;
+        font-family: "NEXONLv1Gothic";
+        padding: 20px;
+        position: absolute;
+    }
+
+    .info h1 {
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 1.6;
+        border-bottom: 1px dashed #fff;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    .info h1 a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 400;
+    }
+    .info p {
+        font-weight: 300;
+        font-size: 16px;
+    }
+    .info li {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .info.left {
+        top: auto;
+        left: 0px;
+        bottom: 0px;
+    }
+    .info.left li {
+        display: block;
+        font-size: 14px;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+    .info.right {
+      right: 20px; top: 20px;
+    }
+    .info li a {
+      color:#fff;
+      width: 50px; height: 50px;
+      border: 1px dashed #fff;
+      display: inline-block;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 50px;
+      font-size: 0.8rem;
+      margin: 3px;
+    }
+    .info li a.active {
+        background: #fff;
+        color: #000;
+    }
+
+
+/* main */
+.contents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.contents p {
+  max-width: 70vw;
+  font-size: 3vw;
+  text-align: justify;
+}
+
+.contents p:first-child {
+  font-size: 2.5vw;
+  line-height: 2;
+}
+
+.contents p em {
+  color: orange;
+  border-bottom: 2px dashed orange;
+  font-style: normal;
+}
+
+    /* mouseCont */
+    .mouseCont {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: #fff;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        font-family: 'NEXONLv1Gothic';
+    }
+    .mouseCont p {
+        font-size: 2.5vw;
+        line-height: 2;
+        font-weight: 300;
+    }
+    .mouseCont p:last-child {
+        font-size: 3vw;
+        font-weight: normal;
+        font-weight: 400;
+    }
+    .mouseCont em {
+        font-style: normal;
+        border-bottom: 0.2vw dashed orange;
+        color: orange
+    }
+    .cursor {
+        position: absolute;
+        left: 0; top: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        z-index: 9999;
+        background-color: #fff;
+        user-select: none;
+        pointer-events: none;
+        transition: transform 0.3s, opacity 0.2s;
+    }
+    .cursor.active {
+        opacity: .5;
+        transform: scale(0);
+    }
+    .cursor.show {
+        opacity: .5;
+        transform: scale(1);
+        background: rgba(255, 51, 0, 1);
+    }
+    .cursor-follower {
+        position: absolute;
+        width: 30px; height: 30px;
+        background: rgba(255,255,255,0.3);
+        border-radius: 50%;
+        user-select: none;
+        pointer-events: none;
+        transition: transform 0.6s ease-in-out, opacity 0.2s ease-in-out;
+    }
+    .cursor-follower.active {
+        transform: scale(5);
+    }
+</style>
+
+<body>
+  <!-- main -->
+  <main id="mouseCont">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <article class="mouseCont">
+        <p>When money speaks, the <em>truth</em> keeps silent.</p>
+        <p>돈이 말할 때는 <em>진실</em>은 입을 다문다</p>
+    </article>
+  </main>
+  <!-- //main -->
+
+    <!-- info -->
+  <div class="info">
+    <h1><a href="index.html">Mouse Effect02 - Jabascript</a></h1>
+    <p>마우스 이펙트 - 따라다니기</p>
+  </div>
+  
+  <div class="info right">
+    <ul>
+        <li><a href="mouseEffectJabascript01.html">JS_01</a><a href="mouseEffectjQuery01.html">JQ_1</a></li>
+        <li><a href="mouseEffectJabascript02.html" class="active">JS_02</a><a href="mouseEffectjQuery02.html">JQ_2</a></li>
+        <li><a href="mouseEffectJabascript03.html">JS_03</a><a href="mouseEffectjQuery03.html">JQ_3</a></li>
+        <li><a href="mouseEffectJavascript04.html">JS_04</a><a href="mouseEffectjQuery04.html">JQ_4</a></li>
+        <li><a href="mouseEffectJavascript05.html">JS_05</a><a href="mouseEffectjQuery05.html">JQ_5</a></li>
+        <li><a href="mouseEffectJavascript06.html">JS_06</a><a href="mouseEffectjQuery06.html">JQ_6</a></li>
+        <li><a href="mouseEffectJavascript07.html">JS_07</a><a href="mouseEffectjQuery07.html">JQ_7</a></li>
+        <li><a href="mouseEffectJavascript08.html">JS_08</a><a href="mouseEffectjQuery08.html">JQ_8</a></li>
+    </ul>
+  </div>
+  
+  <div class="info left">
+    <ul>
+      <li>pageX : <span class="pageX">0</span>px</li>
+      <li>pageY : <span class="pageY">0</span>px</li>
+    </ul>
+  </div>
+  <!-- //info -->
+
+  <!-- script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+  <script>
+    const curaor = document.querySelector(".cursor");
+    const follower = document.querySelector(".cursor-follower");
+
+    //움직임
+    document.addEventListener("mousemove", (e) => {
+      // curaor.style.left = "e.pageX";
+      // curaor.style.top = "e.pageY";
+
+      gsap.to(curaor, {duration: 0.3, left: e.pageX -5, top: e.pageY -5});
+      gsap.to(follower, {duration: 0.8, left: e.pageX -15, top: e.pageY -15});
+    })
+
+    //오버 효과
+    document.querySelectorAll(".mouseCont em").forEach(e => {
+      e.addEventListener("mouseenter", () => {
+        curaor.classList.add("active");
+        follower.classList.add("active");
+      });
+      e.addEventListener("mouseleave", () => {
+        curaor.classList.remove("active");
+        follower.classList.remove("active");
+      });
+    });
+
+    //출력
+    document.addEventListener("mousemove", (e) => {
+      document.querySelector(".pageX").textContent = e.pageX;
+      document.querySelector(".pageY").textContent = e.pageY;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/dracula.min.css">
+</head>
+<body>
+    <!-- modal -->
+    <div class="source">
+        <button class="source-btn">소스보기</button>
+        <div id="modal">
+            <div class="modal-wrap">
+                <div class="modal-cont">
+                    <div class="code-view">
+                        <div class="view-header" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="view-title">
+                            <ul>
+                                <li class="active"><a href="#">HTML</a></li>
+                                <li><a href="#">CSS</a></li>
+                                <li><a href="#">JavaScript</a></li>
+                            </ul>
+                        </div>
+                        <div class="view-cont">
+                            <div>
+<pre><code class="language-js">
+//event handling
+document.addEventListener("keydown", e => {
+    switch(e.keyCode){
+        case 39:
+            moveBlock("left", 1);
+            break;
+        case 37:
+            moveBlock("left", -1);
+            break;
+        case 40:
+            moveBlock("top", 1);
+            break;
+        case 38:
+            chageDirection();
+            break;
+        case 32:
+            dropBlock();
+            break;
+        default:
+            break;
+    }
+})
+</code></pre>
+                            </div>
+                            <!-- //cont1 -->
+                            <div>
+<pre><code class="language-js">
+function prependNewLine() {
+    const li = document.createElement("li");
+    const ul = document.createElement("ul")
+    for(let j = 0; j &lt; GAME_COLS; j++) {
+        const matrix = document.createElement("li");
+        ul.prepend(matrix);
+    }
+    li.prepend(ul)
+    playground.prepend(li)
+}
+function renderBlocks( moveType = "" ){
+    const { type, direction, top, left } = tempMovingItem;
+    const movingBlocks = document.querySelectorAll(".moving");
+    movingBlocks.forEach(moving => {
+        moving.classList.remove(type, "moving");
+    })
+    BLOCKS[type][direction].some(block=>{
+        const x = block[0] + left;
+        const y = block[1] + top;
+        const target = playground.childNodes[y] ? playground.childNodes[y].childNodes[0].childNodes[x] : null;
+        const isAvaliable = checkEmptyy(target);
+        if(isAvaliable){
+            target.classList.add(type, "moving")
+        } else {
+            tempMovingItem = { ...movingItem }
+            if(moveType === 'retry'){
+                clearInterval(downInterval)
+                showGameoverText()
+            }
+            setTimeout(()=>{
+                renderBlocks('retry');
+                if(moveType === "top"){
+                    seizeBlock();
+                }
+            },0);
+            return true;
+        }
+    })
+    movingItem.left = left;
+    movingItem.top = top;
+    movingItem.direction = direction;
+}
+</code></pre>
+                            </div>
+                            <!-- //cont2 -->
+                            <div>
+<pre><code class="language-js">
+const BLOCKS = {
+    square: [
+        [
+            [0,0],
+            [0,1],
+            [1,0],
+            [1,1],
+        ],
+        [
+            [0,0],
+            [0,1],
+            [1,0],
+            [1,1],
+        ],
+        [
+            [0,0],
+            [0,1],
+            [1,0],
+            [1,1],
+        ],
+        [
+            [0,0],
+            [0,1],
+            [1,2],
+            [1,1],
+        ],
+    ],
+}
+</code></pre>
+                            </div>
+                            <!-- //cont3 -->
+                        </div>
+                    </div>
+                </div>
+                <button class="modal-close">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- info -->
+    <h1 class="score">0</h1>
+    <div class="wrapper">
+        <div class="game-text">
+            <span>게임종료</span>
+            <button>다시시작</button>
+        </div>
+        <div class="playground">
+            <ul></ul>
+        </div>
+    </div>
+
+    <script src="js/script.js" type="module"></script>
+    <script src="js/highlight.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+        highlight();
+        modal();
+        tabMenu();
+    </script>
+</body>
+</html>

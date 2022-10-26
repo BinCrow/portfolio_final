@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+* {margin: 0;padding: 0;border: 0; box-sizing: border-box}
+ul,li {list-style: none}
+img{vertical-align: top}
+
+.hidden {width: 0;height: 0; overflow: hidden;
+    font-size: 0; line-height: 0;
+    position: absolute; left: -9999px;
+}
+a {text-decoration: none; color: inherit}
+em{font-style: normal}
+
+
+body {font-family: arial,sans-serif; font-weight: 700; text-align: center}
+
+
+#header {width: 500px; height: 100%;
+    position:fixed; left:-550px; top: 0; z-index: 100;
+    background-color: #fff;
+    transform:skewX(-45deg)
+}
+#header .logo a{width: 200px; height: 130px;
+    position: absolute; left:190px; top: 20px; z-index: 100;
+    background-image: url(/chanel/img/logo.png);
+    text-indent: -9999px;
+    transform: skewX(45deg)
+}
+#gnb {width: 700px; height: 100%;
+    position:absolute; left:-100px; bottom: 0px; z-index: 200;
+    background-color: #fff;
+    transform:skewX(65deg)
+}
+#gnb .depth1 {}
+#gnb .depth1 > a {display: block;
+	width: 150px; height: 50px; background-color: #fff;
+	position:fixed; right:0px; z-index: 300;
+	line-height: 50px; color:#000;
+	transition:all 0.3s
+}
+#gnb .depth1:nth-child(1) a {bottom:290px}
+#gnb .depth1:nth-child(2) a {bottom:240px}
+#gnb .depth1:nth-child(3) a {bottom:190px}
+#gnb .depth1:nth-child(4) a {bottom:140px}
+#gnb .depth1:nth-child(5) a {bottom:90px}
+
+#gnb span {display: block;
+	transform: skewX(-50deg)
+}
+#gnb .depth2 li{display: block}
+#gnb .depth2 a {display: block;
+	width: 150px; height: 40px; background-color: rgba(255,255,255,0.5);
+	line-height: 40px; color:#000;	
+	position:fixed; right:0px; bottom: 0; z-index: 100;	
+	transition:all 0.3s
+}
+#gnb .depth1:hover > a {background-color: #000;
+	color:#fff
+}
+#gnb .depth1:hover .depth2 a{right:-150px}
+#gnb .depth1:hover .depth2 li:nth-child(1) a {margin-bottom:0}
+#gnb .depth1:hover .depth2 li:nth-child(2) a {margin-bottom:40px}
+#gnb .depth1:hover .depth2 li:nth-child(3) a {margin-bottom:80px}
+#gnb .depth1:hover .depth2 li:nth-child(4) a {margin-bottom:120px}
+#gnb .depth2 a:hover {border-bottom:1px solid #000}
+
+
+.mov video {width: 100%; height: 100%;
+    position: absolute; left: 0; top: 0;
+    object-fit: cover
+}
+.txt {position: fixed; left: 85px; top: 405px; z-index: 100;
+	text-indent: -9999px;
+	width: 397px; height: 40px;
+	background: url(../img/text.png) no-repeat 0 0
+}
+.banner {width: 600px; height: 100%}
+.banner-wrap {width: 500px; height: 100%;
+	position: fixed; right: 100px; top: 0;
+	background-color: rgba(255,255,255,0.3);
+	transform: translateX(500px);
+	transition:all 0.5s
+}
+.banner-wrap ul {width: 500px; height: 100%;
+	position: fixed; right: -100px; top: 0;
+	background-color: rgba(255,255,255,0.3);
+	transform: translateX(400px);
+	transition:all 1s
+}
+.banner-wrap li {margin-right: 100px;
+	transition: all 1.5s
+}
+.banner-wrap li:nth-child(1) {
+	padding-top: 60px;
+	transform: translateX(300px)
+} 
+.banner-wrap li:nth-child(2) {transform: translateX(800px)}
+.banner-wrap li:nth-child(3) {transform: translateX(1200px)}
+.banner-wrap li img{border-radius: 30px;
+	opacity: 0.5;
+	transition: all 0.4s;
+}
+.banner-wrap li em {display: block; 
+	line-height: 65px; color:#000;
+}
+
+.banner-wrap li a:hover:after {opacity: 0}
+.arrow {width: 100px; height: 50px;
+    position: absolute; right: 395px; top: 450px; z-index: 300;
+	font-size: 30px; color: #000;
+    animation: leftright 1s linear infinite;
+}
+.arrow:hover {animation:hover 1s linear infinite}
+.banner-wrap:hover {transform: translateX(0px)}   
+.banner-wrap:hover ul {transform: translateX(0px)}
+.banner-wrap:hover ul li {transform: translateX(0px)}
+.banner-wrap li:hover img{opacity: 1;}
+@keyframes leftright {
+    0% {right: 395px}
+    50% {right: 405px}
+}
